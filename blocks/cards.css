@@ -1,0 +1,26 @@
+.gallery__card {
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card__image {
+    width: 100%;
+}
+
+.card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px 0 20px;
+    
+}
+
+
+.card__name {
+    font-weight: 900;
+    font-family: "Inter", sans-serif;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
