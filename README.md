@@ -8,7 +8,14 @@
   
 **Intro**
   
-This project is made so all the elements are displayed correctly on popular screen sizes. We recommend investing more time in completing this project, since it's more difficult than previous ones.  
+**Name**
+This project is called Around the U.S.
+
+**Description**
+It utlizes all the of the previous learned skills up to date such as CSS grids, Flex box, as well as responsive skills such as media queries.
+
+**Website Link**
+https://echmascript.github.io/se_project_aroundtheus/
   
 **Figma**  
   
