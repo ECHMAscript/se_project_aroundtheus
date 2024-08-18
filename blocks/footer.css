@@ -5,6 +5,12 @@
     font-family: "Inter", sans-serif;
     max-width: 885px;
     color: #545454;
+    font-size: 1.125em;
+    line-height: 21.78px;
+}
+
+.footer__copyright {
+    padding: 0;
 }
 
 
@@ -12,5 +18,15 @@
     .footer {
         margin: 67px 20px 0 20px;
         max-width: calc(100% - 40px);
+    }
+}
+
+
+@media screen and (max-width: 320px) {
+    .footer {
+        margin: 67px 20px 0 20px;
+        max-width: calc(100% - 40px);
+        font-size: 14px;
+        line-height: 16.94px;
     }
 }
