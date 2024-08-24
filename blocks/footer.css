@@ -11,6 +11,7 @@
 
 .footer__copyright {
     padding: 0;
+    margin: 0;
 }
 
 
@@ -24,9 +25,8 @@
 
 @media screen and (max-width: 320px) {
     .footer {
-        margin: 67px 20px 0 20px;
-        max-width: calc(100% - 40px);
         font-size: 14px;
         line-height: 16.94px;
+        margin-top: 48px;
     }
 }

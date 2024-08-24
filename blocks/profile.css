@@ -24,6 +24,11 @@
     font-weight: 500;
     font-size: 2.625em;
     margin: 0 16px 0 0;
+    line-height: 48px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 282px;
 }
 
 .profile__edit-profile {
@@ -63,14 +68,11 @@
     transition: opacity 0.3s ease;
 }
 
-.profile__add-buttom:hover {
+.profile__add-button:hover {
     opacity: .6;
 }
 
-.card__like-button-svg {
-    width: 22px;
-    height: 22px;
-}
+
 
 
 
@@ -100,7 +102,7 @@
         font-size: 0.875em;
     }
 
-    .profile__add-buttom {
+    .profile__add-button {
         width: 120px;
         height: 40px;
     }
@@ -125,9 +127,26 @@
         font-size: 14px;
     }
 
-    .profile__add-buttom {
+    .profile__add-button {
         margin: 0;
         height: 50px;
         width: 282px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .profile {
+        margin-bottom: 36px;
+    }
+
+
+    .profile__edit-profile {
+        height: 18px;
+        width: 18px;
+    }
+
+    .profile__edit-profile-svg {
+        height: 7.5px;
+        width: 7.5px;
     }
 }
