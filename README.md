@@ -16,6 +16,10 @@ It utlizes all the of the previous learned skills up to date such as CSS grids, 
 
 **Website Link**
 https://echmascript.github.io/se_project_aroundtheus/
+
+
+**Video Link**
+https://drive.google.com/file/d/1CdAhJnjrPjgTSVeEud3yJZiGhKYsX40_/view?usp=sharing
   
 **Figma**  
   
