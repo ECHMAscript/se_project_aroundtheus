@@ -1,18 +1,15 @@
 .gallery {
-    margin: 0 auto;
-    max-width: 885px;
-    display: grid;
-    justify-content: center;
-    grid-template-columns: repeat(auto-fit, 282px);
-    grid-gap: 20px 18px;
+  margin: 0 auto;
+  max-width: 885px;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, 282px);
+  grid-gap: 20px 18px;
 }
 
-
-
-
 @media screen and (max-width: 1100px) {
-    .gallery {
-        margin: 0 20px;
-        max-width: calc(100% - 40px);
-    }
+  .gallery {
+    margin: 0 20px;
+    max-width: calc(100% - 40px);
+  }
 }
