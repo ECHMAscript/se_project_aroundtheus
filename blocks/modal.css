@@ -1,0 +1,35 @@
+.modal {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+}
+
+.modal__container {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 430px;
+  min-width: 282px;
+  max-height: 330px;
+  background: white;
+  padding: 34px 36px 36.51px 36px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  z-index: 3;
+}
+
+.modal_opened {
+  display: flex;
+}
+
+@media screen and (max-width: 520px) {
+  .modal__container {
+    margin: 0 auto;
+    width: auto;
+    padding: 25px 22px 25px 22px;
+  }
+}
