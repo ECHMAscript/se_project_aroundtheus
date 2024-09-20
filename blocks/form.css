@@ -32,7 +32,7 @@
   flex-direction: column;
 }
 
-.form__inputs__input-fields {
+.form__input-fields {
   width: 358px;
   padding-bottom: 13.26px;
   font-size: 0.875em;
@@ -40,17 +40,18 @@
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   line-height: 16.94px;
+
 }
 
-.form__inputs__input-fields:nth-child(1) {
+.form__input-fields:nth-child(1) {
   margin-bottom: 29.74px;
 }
 
-.form__inputs__input-fields:nth-child(2) {
+.form__input-fields:nth-child(2) {
   margin-bottom: 48px;
 }
 
-.form__inputs__input-fields::placeholder {
+.form__input-fields::placeholder {
   font-size: 0.875em;
 }
 
