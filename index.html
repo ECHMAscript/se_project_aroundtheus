@@ -30,7 +30,7 @@
                 placeholder="Description"
               />
             </fieldset>
-            <button type="button" class="form__button">Save</button>
+            <button type="submit" class="form__button">Save</button>
           </form>
         </div>
       </div>
@@ -63,7 +63,26 @@
           </button>
         </section>
         <section class="gallery">
-          <div class="card">
+          <template id="card">
+            <div class="card">
+              <img
+                src="images/yosemite-valley.jpg"
+                alt="An image of yosemite valley"
+                class="card__image"
+              />
+              <div class="card__footer">
+                <h2 class="card__name">Yosemite Valley</h2>
+                <button class="card__like-button" type="button">
+                  <img
+                    class="card__like-button-svg"
+                    src="svg/heart.svg"
+                    alt="Heart Svg"
+                  />
+                </button>
+              </div>
+            </div>
+          </template>
+          <!-- <div class="card">
             <img
               src="images/yosemite-valley.jpg"
               alt="An image of yosemite valley"
@@ -144,7 +163,7 @@
                 <img src="svg/heart.svg" alt="Heart Svg" />
               </button>
             </div>
-          </div>
+          </div> -->
         </section>
       </main>
       <footer class="footer">

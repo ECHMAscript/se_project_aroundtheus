@@ -1,42 +1,102 @@
+/**
+ * Saves the changes from the form and updates
+ * the user's profile information
+ * @param {*} e (event object)
+ */
+function saveChanges(e) {
+  e.preventDefault();
+  profileName.textContent = modalFields[0].value;
+  profileJob.textContent = modalFields[1].value;
+
+  closeModal();
+}
+
+/**
+ * Opens the modal
+ */
+function openModal() {
+  modal.classList.add("modal_opened");
+
+  modalFields[0].value = profileName.textContent;
+  modalFields[1].value = profileJob.textContent;
+}
+
+/**
+ * Close the modal
+ */
+function closeModal() {
+  modal.classList.remove("modal_opened");
+}
+
+/**
+ * Clones the card element template and fills the card element with the
+ * data from the initialCards array
+ * @param {*} data (Array Data)
+ * @returns <Card Element>
+ */
+function getCardElement(data) {
+  let cardElement = cardTemplate.querySelector(".card").cloneNode(true);
+  cardElement.querySelector(".card__name").textContent = data.name;
+  cardElement.querySelector(".card__image").src = data.link;
+
+  return cardElement;
+}
+
+// Initialize variables
 let initialCards = [
-    {
-        name: "Yosemite Valley",
-        link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg"
-    },
-    {
-        name: "Lake Louise",
-        link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg"
-    },
-    {
-        name: "Bald Mountains",
-        link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg"
-    },
-    {
-        name: "Latemar",
-        link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg"
-    },
-    {
-        name: "Vanoise National Park",
-        link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg"
-    },
-    {
-        name: "Lago di Braies",
-        link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg"
-    }
+  {
+    name: "Yosemite Valley",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+  },
+  {
+    name: "Lake Louise",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
+  },
+  {
+    name: "Bald Mountains",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
+  },
+  {
+    name: "Latemar",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
+  },
+  {
+    name: "Vanoise National Park",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
+  },
+  {
+    name: "Lago di Braies",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
+  },
 ];
 let profile = document.querySelector(".profile");
 let editProfile = profile.querySelector(".profile__edit-profile");
 let closeModalBtn = document.querySelector(".form__close-btn");
 let modal = document.querySelector(".modal");
+let profileName = profile.querySelector(".profile__profile-name");
+let profileJob = profile.querySelector(".profile__profile-job");
+let formSaveBtn = modal.querySelector(".form__button");
+let modalFields = modal.querySelectorAll(".form__input-fields");
+let cardTemplate = document.querySelector("#card").content;
+let gallery = document.querySelector(".gallery");
 
+/*
+    Propagate the page with cards with information drawn from
+    the initialCards array
+*/
+for (let i = 0; i < initialCards.length; i++) {
+  // Create card
+  let card = getCardElement(initialCards[i]);
 
-console.log(closeModalBtn);
+  // Add card to the gallery
+  gallery.append(card);
+}
 
-editProfile.addEventListener("click", () => {
-    modal.classList.add("modal_opened");
-    
-    console.log("click");
-})
-closeModalBtn.addEventListener("click", () => {
-    modal.classList.remove("modal_opened");
-})
+// Call the openModal function
+editProfile.addEventListener("click", openModal);
+
+// Call the closeModal function
+closeModalBtn.addEventListener("click", closeModal);
+
+// Call the saveChanges function
+formSaveBtn.addEventListener("click", saveChanges);
