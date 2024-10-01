@@ -20,6 +20,7 @@ function openModal() {
   modalJobField.value = profileJob.textContent;
 }
 
+
 /**
  * Close the modal
  */
