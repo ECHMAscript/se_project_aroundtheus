@@ -3,8 +3,7 @@
  * the user's profile information
  * @param {*} e (event object)
  */
-function saveChanges(e) {
-  e.preventDefault();
+function saveChanges() {
   profileName.textContent = modalFields[0].value;
   profileJob.textContent = modalFields[1].value;
 
@@ -17,8 +16,8 @@ function saveChanges(e) {
 function openModal() {
   modal.classList.add("modal_opened");
 
-  modalFields[0].value = profileName.textContent;
-  modalFields[1].value = profileJob.textContent;
+  modalNameField.value = profileName.textContent;
+  modalJobField.value = profileJob.textContent;
 }
 
 /**
@@ -38,6 +37,7 @@ function getCardElement(data) {
   let cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   cardElement.querySelector(".card__name").textContent = data.name;
   cardElement.querySelector(".card__image").src = data.link;
+  cardElement.querySelector(".card__image").alt = data.name;
 
   return cardElement;
 }
@@ -73,12 +73,16 @@ let profile = document.querySelector(".profile");
 let editProfile = profile.querySelector(".profile__edit-profile");
 let closeModalBtn = document.querySelector(".form__close-btn");
 let modal = document.querySelector(".modal");
+let modalNameField = modal.querySelector(".name-field");
+let modalJobField = modal.querySelector(".job-field");
 let profileName = profile.querySelector(".profile__profile-name");
 let profileJob = profile.querySelector(".profile__profile-job");
 let formSaveBtn = modal.querySelector(".form__button");
 let modalFields = modal.querySelectorAll(".form__input-fields");
 let cardTemplate = document.querySelector("#card").content;
 let gallery = document.querySelector(".gallery");
+
+console.log(modalJobField, modalNameField);
 
 /*
     Propagate the page with cards with information drawn from

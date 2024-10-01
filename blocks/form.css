@@ -40,7 +40,6 @@
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   line-height: 16.94px;
-
 }
 
 .form__input-fields:nth-child(1) {
@@ -79,6 +78,7 @@
 @media screen and (max-width: 520px) {
   .form__title {
     margin: 0 0 75px 0;
+    font-size: 18px;
   }
   .form__inputs__input-fields:nth-child(1) {
     margin-bottom: 30px;
@@ -87,11 +87,14 @@
     margin-bottom: 45px;
   }
 
+  .form__input-fields {
+    width: 238px;
+  }
+
   .form__close-btn {
     width: 26px;
     height: 26px;
     top: -70px;
     right: -18px;
   }
-  
 }

@@ -28,8 +28,9 @@
 
 @media screen and (max-width: 520px) {
   .modal__container {
-    margin: 0 auto;
     width: auto;
     padding: 25px 22px 25px 22px;
+    margin: 0 auto;
+    max-width: calc(100% - 40px);
   }
 }
