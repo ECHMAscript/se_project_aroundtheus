@@ -4,8 +4,8 @@
  * @param {*} e (event object)
  */
 function saveChanges() {
-  profileName.textContent = modalFields[0].value;
-  profileJob.textContent = modalFields[1].value;
+  profileName.textContent = modalNameField.value;
+  profileJob.textContent = modalJobField.value;
 
   closeModal();
 }
