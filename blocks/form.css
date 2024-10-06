@@ -18,6 +18,8 @@
   right: -70px;
   cursor: pointer;
   transition: opacity 0.3s ease;
+  background: none;
+  border: none;
 }
 
 .form__close-btn:hover {
