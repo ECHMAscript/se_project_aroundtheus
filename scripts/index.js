@@ -3,7 +3,8 @@
  * the user's profile information
  * @param {*} e (event object)
  */
-function saveChanges() {
+function saveChanges(e) {
+  e.preventDefault();
   profileName.textContent = modalNameField.value;
   profileJob.textContent = modalJobField.value;
 
@@ -79,9 +80,9 @@ let modalJobField = modal.querySelector(".job-field");
 let profileName = profile.querySelector(".profile__profile-name");
 let profileJob = profile.querySelector(".profile__profile-job");
 let formSaveBtn = modal.querySelector(".form__button");
-let modalFields = modal.querySelectorAll(".form__input-fields");
 let cardTemplate = document.querySelector("#card").content;
 let gallery = document.querySelector(".gallery");
+let form = document.querySelector(".form");
 
 console.log(modalJobField, modalNameField);
 
@@ -104,4 +105,4 @@ editProfile.addEventListener("click", openModal);
 closeModalBtn.addEventListener("click", closeModal);
 
 // Call the saveChanges function
-formSaveBtn.addEventListener("click", saveChanges);
+form.addEventListener("submit", saveChanges);
