@@ -9,7 +9,7 @@
 
   <body>
     <div class="page">
-      <div class="modal">
+      <div class="modal editProfile">
         <div class="modal__container">
           <form action="#" class="form">
             <h2 class="form__title">Edit profile</h2>
@@ -36,7 +36,33 @@
           </form>
         </div>
       </div>
+      <div class="modal addNewCardModal">
+        <div class="modal__container">
+          <form action="#" class="form">
+            <h2 class="form__title">New Place</h2>
+            <button class="form__close-btn">
+              <img
+              src="svg/Close Icon.svg"
+              alt="A closing button for the form"
+            />
+            </button>
 
+            <fieldset class="form__inputs">
+              <input
+                type="text"
+                class="form__input-fields title-field"
+                placeholder="Title"
+              />
+              <input
+                type="text"
+                class="form__input-fields link-field"
+                placeholder="Image link"
+              />
+            </fieldset>
+            <button type="submit" class="form__button">Create</button>
+          </form>
+        </div>
+      </div>
       <header class="header">
         <img class="header__logo" src="svg/Logo.svg" alt="Logo of website" />
       </header>
@@ -84,88 +110,6 @@
               </div>
             </div>
           </template>
-          <!-- <div class="card">
-            <img
-              src="images/yosemite-valley.jpg"
-              alt="An image of yosemite valley"
-              class="card__image"
-            />
-            <div class="card__footer">
-              <h2 class="card__name">Yosemite Valley</h2>
-              <button class="card__like-button" type="button">
-                <img
-                  class="card__like-button-svg"
-                  src="svg/heart.svg"
-                  alt="Heart Svg"
-                />
-              </button>
-            </div>
-          </div>
-          <div class="card">
-            <img
-              src="images/lake-louise.png"
-              alt="An image of lake louise"
-              class="card__image"
-            />
-            <div class="card__footer">
-              <h2 class="card__name">Lake Louise</h2>
-              <button class="card__like-button" type="button">
-                <img src="svg/heart.svg" alt="Heart Svg" />
-              </button>
-            </div>
-          </div>
-          <div class="card">
-            <img
-              src="images/bald-mountains.png"
-              alt="An image of the bald mountains"
-              class="card__image"
-            />
-            <div class="card__footer">
-              <h2 class="card__name">Bald Mountains</h2>
-              <button class="card__like-button" type="button">
-                <img src="svg/heart.svg" alt="Heart Svg" />
-              </button>
-            </div>
-          </div>
-          <div class="card">
-            <img
-              src="images/latemar.png"
-              alt="An image of latemar"
-              class="card__image"
-            />
-            <div class="card__footer">
-              <h2 class="card__name">Latemar</h2>
-              <button class="card__like-button" type="button">
-                <img src="svg/heart.svg" alt="Heart Svg" />
-              </button>
-            </div>
-          </div>
-          <div class="card">
-            <img
-              src="images/vanoise-national-park.png"
-              alt="An image of vanoise"
-              class="card__image"
-            />
-            <div class="card__footer">
-              <h2 class="card__name">Vanoise National Park</h2>
-              <button class="card__like-button" type="button">
-                <img src="svg/heart.svg" alt="Heart Svg" />
-              </button>
-            </div>
-          </div>
-          <div class="card">
-            <img
-              src="images/lago-di-braies.png"
-              alt="An Image of lago di braies"
-              class="card__image"
-            />
-            <div class="card__footer">
-              <h2 class="card__name">Lago di Braies</h2>
-              <button class="card__like-button" type="button">
-                <img src="svg/heart.svg" alt="Heart Svg" />
-              </button>
-            </div>
-          </div> -->
         </section>
       </main>
       <footer class="footer">
