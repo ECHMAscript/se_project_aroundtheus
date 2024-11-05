@@ -21,10 +21,13 @@ function saveChanges(e, m, formDetails) {
  * Opens the modal
  */
 function openModal(m, formDetails) {
+  // Add the two classes to make the modal pop up
   m.classList.add("modal_opened");
   m.classList.add("display-img-modal-visibility");
 
+  // Check to see if the formDetails object is empty adding content to the input fields
   if (formDetails !== "") {
+    // Add the last typed information to the fields
     formDetails.input.querySelector(".name-field").value =
       formDetails.profile.querySelector(".profile__profile-name").textContent;
 
@@ -37,8 +40,10 @@ function openModal(m, formDetails) {
  * Close the modal
  */
 function closeModal(m, className) {
+  // remove the class from modal to close it
   m.classList.remove(className);
 
+  // After the animation is finished remove the visibility of the modal
   setTimeout(() => {
     m.classList.remove("display-img-modal-visibility");
   }, 300);
@@ -60,8 +65,10 @@ function getCardElement(data) {
 }
 
 function createCard() {
+  // Clone the card element
   let cardElement = cardTemplate.querySelector(".card").cloneNode(true);
 
+  // Set the cards values
   cardElement.querySelector(".card__name").textContent =
     addCardModal.querySelector(".title-field").value;
   cardElement.querySelector(".card__image").src =
@@ -69,26 +76,29 @@ function createCard() {
   cardElement.querySelector(".card__image").alt =
     addCardModal.querySelector(".title-field").value;
 
-  console.log(cardElement);
-
+  // return the card
   return cardElement;
 }
 
 function openCardImageModal(card) {
-  console.log(card);
+  // Get the modal img url and img title fields
   const imageURL = document.querySelector(".image-modal__image");
   const imageTitle = document.querySelector(".image-modal__image-title");
 
+  // Set their values to the value of the card that was clicked
   imageURL.src = card.querySelector(".card__image").src;
   imageTitle.textContent = card.querySelector(".card__name").textContent;
 
+  // Make the modal visible
   imgModal.classList.add("display-img-modal");
   imgModal.classList.add("display-img-modal-visibility");
 }
 
 function likeCard(card) {
+  // Get the src of the card
   let cardSrc = card.querySelector(".card__like-button-svg").src;
-  console.log(cardSrc);
+
+  // Check if the card is currently liked or not
   if (cardSrc.includes("svg/heart.svg")) {
     card.querySelector(".card__like-button-svg").src = "svg/black-heart.svg";
   } else {
@@ -176,22 +186,27 @@ addCardBtn.addEventListener("click", () => {
   openModal(addCardModal, "");
 });
 
+// Close the add card modal
 addCardModal.querySelector(".form__close-btn").addEventListener("click", () => {
   closeModal(addCardModal, "modal_opened");
 });
 
-addCardModal.querySelector(".form__button").addEventListener("click", () => {
+// Create a new card
+addCardModal.querySelector(".form").addEventListener("submit", (e) => {
+  e.preventDefault();
   gallery.append(createCard());
   closeModal(addCardModal, "modal_opened");
 });
 
+// Open the image card modal when clicked
 gallery.addEventListener("click", (e) => {
-  // Open the image modal
+  // Make sure what was clicked was not the delete button or like button
   if (e.target.closest(".card")) {
     if (
       !e.target.closest(".card__trash-btn") &&
       !e.target.closest(".card__like-button")
     ) {
+      // Get the card information and pass it to the open card modal function
       let card = e.target.closest(".card");
 
       openCardImageModal(card);
@@ -204,8 +219,6 @@ gallery.addEventListener("click", (e) => {
   if (e.target.closest(".card__trash-btn")) {
     let card = e.target.closest(".card");
     card.remove();
-    console.log(card);
-    console.log("Did you just try to delete me???!");
   }
 });
 
@@ -215,7 +228,6 @@ gallery.addEventListener("click", (e) => {
     let card = e.target.closest(".card");
 
     likeCard(card);
-    console.log("Thanks for the likes!");
   }
 });
 
