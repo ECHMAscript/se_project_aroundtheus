@@ -4,15 +4,18 @@
   height: 100vh;
   z-index: 2;
   background-color: rgba(0, 0, 0, 0.5);
-
 }
 
 .editProfile {
-  display: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0s, opacity 0.3s ease-in-out;
 }
 
 .addNewCardModal {
-  display: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: visibility 0s, opacity 0.3s ease-in-out;
 }
 
 .modal__container {
@@ -31,7 +34,7 @@
 }
 
 .modal_opened {
-  display: flex;
+  opacity: 1;
 }
 
 @media screen and (max-width: 520px) {

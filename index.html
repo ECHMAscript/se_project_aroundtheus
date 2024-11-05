@@ -15,9 +15,9 @@
             <h2 class="form__title">Edit profile</h2>
             <button class="form__close-btn">
               <img
-              src="svg/Close Icon.svg"
-              alt="A closing button for the form"
-            />
+                src="svg/Close Icon.svg"
+                alt="A closing button for the form"
+              />
             </button>
 
             <fieldset class="form__inputs">
@@ -42,9 +42,9 @@
             <h2 class="form__title">New Place</h2>
             <button class="form__close-btn">
               <img
-              src="svg/Close Icon.svg"
-              alt="A closing button for the form"
-            />
+                src="svg/Close Icon.svg"
+                alt="A closing button for the form"
+              />
             </button>
 
             <fieldset class="form__inputs">
@@ -61,6 +61,23 @@
             </fieldset>
             <button type="submit" class="form__button">Create</button>
           </form>
+        </div>
+      </div>
+      <div class="image-modal">
+        <div class="image-modal__overlay"></div>
+
+        <div class="image-modal__inner-container">
+          <button class="image-modal__close-btn">
+            <img
+              class="image-modal__close-button"
+              src="svg/Close Icon.svg"
+              alt="A closing button for the form"
+            />
+          </button>
+          <div class="image-modal__image-container">
+            <img src="" alt="" class="image-modal__image" />
+          </div>
+          <p class="image-modal__image-title"></p>
         </div>
       </div>
       <header class="header">
@@ -93,6 +110,9 @@
         <section class="gallery">
           <template id="card">
             <div class="card">
+              <button class="card__trash-btn">
+                <img src="svg/trash.svg" alt="delete image button" />
+              </button>
               <img
                 src="images/yosemite-valley.jpg"
                 alt="An image of yosemite valley"
