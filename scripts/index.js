@@ -3,7 +3,7 @@
  * the user's profile information
  * @param {*} e (event object)
  */
-function saveChanges(e, modal, formDetails) {
+function saveProfileChanges(e, modal, formDetails) {
   e.preventDefault();
 
   formDetails.profile.querySelector(".profile__profile-name").textContent =
@@ -165,6 +165,14 @@ initialCards.forEach((card) => {
 // Call the openModal function
 editProfileButton.addEventListener("click", () => {
   openPopup(editProfileModal);
+
+  console.log(editProfileForm.querySelector(".name-field"));
+  editProfileForm.querySelector(".name-field").value = profile.querySelector(
+    ".profile__profile-name"
+  ).textContent;
+  editProfileForm.querySelector(".job-field").value = profile.querySelector(
+    ".profile__profile-job"
+  ).textContent;
 });
 
 // Call the closeModal function
@@ -178,7 +186,7 @@ editProfileForm.addEventListener("submit", (e) => {
     profile: profile,
     input: editProfileModal,
   };
-  saveChanges(e, editProfileModal, formModal);
+  saveProfileChanges(e, editProfileModal, formModal);
 });
 
 addCardBtn.addEventListener("click", () => {
