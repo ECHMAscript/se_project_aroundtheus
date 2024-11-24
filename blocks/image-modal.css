@@ -13,7 +13,7 @@
   transition: visibility 0s, opacity 0.3s ease-in-out;
 }
 
-.display-img-modal {
+.modal_opened {
   opacity: 1;
 }
 
@@ -34,12 +34,9 @@
 }
 
 .image-modal__close-btn {
-  position: absolute;
   right: 0;
   top: -40px;
   right: -40px;
-  cursor: pointer;
-  transition: opacity 0.3s ease;
 }
 
 .image-modal__close-btn:hover {

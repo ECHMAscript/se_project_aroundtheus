@@ -3,10 +3,8 @@
  * the user's profile information
  * @param {*} e (event object)
  */
-function saveChanges(e, m, formDetails) {
+function saveChanges(e, modal, formDetails) {
   e.preventDefault();
-  // profileName.textContent = modalNameField.value;
-  // profileJob.textContent = modalJobField.value;
 
   formDetails.profile.querySelector(".profile__profile-name").textContent =
     formDetails.input.querySelector(".name-field").value;
@@ -14,34 +12,23 @@ function saveChanges(e, m, formDetails) {
   formDetails.profile.querySelector(".profile__profile-job").textContent =
     formDetails.input.querySelector(".job-field").value;
 
-  closeModal(m, "modal_opened");
+  closePopup(modal, "modal_opened");
 }
 
 /**
- * Opens the modal
+ * Opens the popup
  */
-function openModal(m, formDetails) {
-  // Add the two classes to make the modal pop up
-  m.classList.add("modal_opened");
-  m.classList.add("display-img-modal-visibility");
-
-  // Check to see if the formDetails object is empty adding content to the input fields
-  if (formDetails !== "") {
-    // Add the last typed information to the fields
-    formDetails.input.querySelector(".name-field").value =
-      formDetails.profile.querySelector(".profile__profile-name").textContent;
-
-    formDetails.input.querySelector(".job-field").value =
-      formDetails.profile.querySelector(".profile__profile-job").textContent;
-  }
+function openPopup(popup) {
+  popup.classList.add("modal_opened");
+  popup.classList.add("display-img-modal-visibility");
 }
 
 /**
  * Close the modal
  */
-function closeModal(m, className) {
+function closePopup(m) {
   // remove the class from modal to close it
-  m.classList.remove(className);
+  m.classList.remove("modal_opened");
 
   // After the animation is finished remove the visibility of the modal
   setTimeout(() => {
@@ -56,41 +43,59 @@ function closeModal(m, className) {
  * @returns <Card Element>
  */
 function getCardElement(data) {
-  let cardElement = cardTemplate.querySelector(".card").cloneNode(true);
+  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
+  const cardImage = cardElement.querySelector(".card__image");
+
   cardElement.querySelector(".card__name").textContent = data.name;
-  cardElement.querySelector(".card__image").src = data.link;
-  cardElement.querySelector(".card__image").alt = data.name;
+  cardImage.src = data.link;
+  cardImage.alt = data.name;
 
-  return cardElement;
-}
+  // Like Card
+  cardElement.addEventListener("click", (e) => {
+    if (e.target.closest(".card__like-button")) {
+      likeCard(cardElement);
+    }
+  });
 
-function createCard() {
-  // Clone the card element
-  let cardElement = cardTemplate.querySelector(".card").cloneNode(true);
+  // Delete Card
+  cardElement.addEventListener("click", (e) => {
+    if (e.target.closest(".card__trash-btn")) {
+      console.log("wow");
+      cardElement.remove();
+    }
+  });
 
-  // Set the cards values
-  cardElement.querySelector(".card__name").textContent =
-    addCardModal.querySelector(".title-field").value;
-  cardElement.querySelector(".card__image").src =
-    addCardModal.querySelector(".link-field").value;
-  cardElement.querySelector(".card__image").alt =
-    addCardModal.querySelector(".title-field").value;
+  // Open card modal
+  cardElement.addEventListener("click", (e) => {
+    // Make sure what was clicked was not the delete button or like button
+    if (e.target.closest(".card")) {
+      if (
+        !e.target.closest(".card__trash-btn") &&
+        !e.target.closest(".card__like-button")
+      ) {
+        // Get the card information and pass it to the open card modal function
+        openCardImageModal(cardElement);
+      }
+    }
 
-  // return the card
+    console.log("Did I even get this far?");
+  });
+
   return cardElement;
 }
 
 function openCardImageModal(card) {
   // Get the modal img url and img title fields
-  const imageURL = document.querySelector(".image-modal__image");
-  const imageTitle = document.querySelector(".image-modal__image-title");
+  const image = imgModal.querySelector(".image-modal__image");
+  const imageTitle = imgModal.querySelector(".image-modal__image-title");
 
   // Set their values to the value of the card that was clicked
-  imageURL.src = card.querySelector(".card__image").src;
+  image.src = card.querySelector(".card__image").src;
+  image.alt = card.querySelector(".card__name").textContent;
   imageTitle.textContent = card.querySelector(".card__name").textContent;
 
   // Make the modal visible
-  imgModal.classList.add("display-img-modal");
+  imgModal.classList.add("modal_opened");
   imgModal.classList.add("display-img-modal-visibility");
 }
 
@@ -133,22 +138,20 @@ let initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
-let profile = document.querySelector(".profile");
-let editProfile = profile.querySelector(".profile__edit-profile");
-let closeModalBtn = document.querySelector(".editProfile .form__close-btn");
-let addCardModal = document.querySelector(".addNewCardModal");
 
-let modal = document.querySelector(".editProfile");
-let modalNameField = modal.querySelector(".editProfile .name-field");
-let modalJobField = modal.querySelector(".editProfile .job-field");
-let profileName = profile.querySelector(".profile__profile-name");
-let profileJob = profile.querySelector(".profile__profile-job");
-let formSaveBtn = modal.querySelector(".form__button");
-let cardTemplate = document.querySelector("#card").content;
-let gallery = document.querySelector(".gallery");
-let form = document.querySelector(".editProfile .form");
-const addCardBtn = document.querySelector(".profile__add-button");
-const imgModal = document.querySelector(".image-modal");
+const page = document.querySelector(".page");
+const profile = page.querySelector(".profile");
+const editProfileModal = page.querySelector(".editProfile");
+const editProfileButton = profile.querySelector(".profile__edit-profile");
+
+const closeEditModalBtn = page.querySelector(".editProfile .modal__close");
+const addCardModal = page.querySelector(".addNewCardModal");
+
+const cardTemplate = page.querySelector("#card").content;
+const gallery = page.querySelector(".gallery");
+const editProfileForm = page.querySelector(".editProfile .form");
+const addCardBtn = page.querySelector(".profile__add-button");
+const imgModal = page.querySelector(".image-modal");
 
 /*
     Propagate the page with cards with information drawn from
@@ -160,79 +163,48 @@ initialCards.forEach((card) => {
 });
 
 // Call the openModal function
-editProfile.addEventListener("click", () => {
-  let formModal = {
-    profile: profile,
-    input: modal,
-  };
-  openModal(modal, formModal);
+editProfileButton.addEventListener("click", () => {
+  openPopup(editProfileModal);
 });
 
 // Call the closeModal function
-closeModalBtn.addEventListener("click", () => {
-  closeModal(modal, "modal_opened");
+closeEditModalBtn.addEventListener("click", () => {
+  closePopup(editProfileModal, "modal_opened");
 });
 
 // Call the saveChanges function
-form.addEventListener("submit", (e) => {
+editProfileForm.addEventListener("submit", (e) => {
   let formModal = {
     profile: profile,
-    input: modal,
+    input: editProfileModal,
   };
-  saveChanges(e, modal, formModal);
+  saveChanges(e, editProfileModal, formModal);
 });
 
 addCardBtn.addEventListener("click", () => {
-  openModal(addCardModal, "");
+  openPopup(addCardModal);
 });
 
 // Close the add card modal
-addCardModal.querySelector(".form__close-btn").addEventListener("click", () => {
-  closeModal(addCardModal, "modal_opened");
+addCardModal.querySelector(".modal__close").addEventListener("click", () => {
+  closePopup(addCardModal);
 });
 
 // Create a new card
 addCardModal.querySelector(".form").addEventListener("submit", (e) => {
   e.preventDefault();
-  gallery.append(createCard());
-  closeModal(addCardModal, "modal_opened");
+  card = {
+    name: addCardModal.querySelector(".title-field").value,
+    link: addCardModal.querySelector(".link-field").value,
+  };
+
+  gallery.prepend(getCardElement(card));
+  closePopup(addCardModal, "modal_opened");
+
+  addCardModal.querySelector(".title-field").value = "";
+  addCardModal.querySelector(".link-field").value = "";
 });
 
-// Open the image card modal when clicked
-gallery.addEventListener("click", (e) => {
-  // Make sure what was clicked was not the delete button or like button
-  if (e.target.closest(".card")) {
-    if (
-      !e.target.closest(".card__trash-btn") &&
-      !e.target.closest(".card__like-button")
-    ) {
-      // Get the card information and pass it to the open card modal function
-      let card = e.target.closest(".card");
-
-      openCardImageModal(card);
-    }
-  }
+imgModal.querySelector(".modal__close").addEventListener("click", () => {
+  closePopup(imgModal, "display-img-modal");
 });
-
-gallery.addEventListener("click", (e) => {
-  // Open the image modal
-  if (e.target.closest(".card__trash-btn")) {
-    let card = e.target.closest(".card");
-    card.remove();
-  }
-});
-
-gallery.addEventListener("click", (e) => {
-  // Like an image
-  if (e.target.closest(".card__like-button")) {
-    let card = e.target.closest(".card");
-
-    likeCard(card);
-  }
-});
-
-imgModal
-  .querySelector(".image-modal__close-button")
-  .addEventListener("click", () => {
-    closeModal(imgModal, "display-img-modal");
-  });
