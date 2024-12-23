@@ -24,14 +24,9 @@ function openPopup(popup) {
 /**
  * Close the modal
  */
-function closePopup(m) {
+function closePopup(popup) {
   // remove the class from modal to close it
-  m.classList.remove("modal_opened");
-
-  // After the animation is finished remove the visibility of the modal
-  setTimeout(() => {
-    m.classList.remove("display-img-modal-visibility");
-  }, 300);
+  popup.classList.remove("modal_opened");
 }
 
 /**
@@ -43,19 +38,18 @@ function closePopup(m) {
 function getCardElement(data) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   const cardImage = cardElement.querySelector(".card__image");
+  const cardLikeButton = cardElement.querySelector(".card__like-button svg");
 
   cardElement.querySelector(".card__name").textContent = data.name;
   cardImage.src = data.link;
   cardImage.alt = data.name;
 
   // Like Card
-  cardElement
-    .querySelector(".card__like-button")
-    .addEventListener("click", (e) => {
-      if (e.target.closest(".card__like-button")) {
-        likeCard(cardElement);
-      }
-    });
+  cardLikeButton.addEventListener("click", (e) => {
+    if (e.target.closest(".card__like-button")) {
+      likeCard(cardLikeButton);
+    }
+  });
 
   // Delete Card
   cardElement
@@ -68,7 +62,7 @@ function getCardElement(data) {
     });
 
   // Open card modal
-  cardElement.addEventListener("click", (e) => {
+  cardImage.addEventListener("click", (e) => {
     // Make sure what was clicked was not the delete button or like button
     if (e.target.closest(".card")) {
       if (
@@ -97,14 +91,12 @@ function openCardImageModal(card) {
   openPopup(imgModal);
 }
 
-function likeCard(card) {
-  card
-    .querySelector(".card__like-button-svg")
-    .classList.toggle("card__like-button-svg-liked");
+function likeCard(likeButton) {
+  likeButton.classList.toggle("card__like-button_active");
 }
 
 // Initialize variables
-let initialCards = [
+const initialCards = [
   {
     name: "Yosemite Valley",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
@@ -201,7 +193,7 @@ addCardModal.querySelector(".form").addEventListener("submit", (e) => {
   console.log(card.link);
 
   gallery.prepend(getCardElement(card));
-  closePopup(addCardModal, "modal_opened");
+  closePopup(addCardModal);
 
   addCardModalTitleField.value = "";
   addCardModalLinkField.value = "";

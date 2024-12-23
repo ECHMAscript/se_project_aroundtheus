@@ -68,7 +68,7 @@
   width: 22px;
   height: 22px;
 }
-.card__like-button-svg-liked {
+.card__like-button_active {
   fill: black;
 }
 .card__like-button:hover {
