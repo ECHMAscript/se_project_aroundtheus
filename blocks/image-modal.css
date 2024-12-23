@@ -15,9 +15,6 @@
 
 .modal_opened {
   opacity: 1;
-}
-
-.display-img-modal-visibility {
   visibility: visible;
 }
 

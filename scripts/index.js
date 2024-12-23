@@ -3,16 +3,14 @@
  * the user's profile information
  * @param {*} e (event object)
  */
-function saveProfileChanges(e, modal, formDetails) {
+function saveProfileChanges(e, modal) {
   e.preventDefault();
 
-  formDetails.profile.querySelector(".profile__profile-name").textContent =
-    formDetails.input.querySelector(".name-field").value;
+  profileName.textContent = profileNameFieldInput.value;
 
-  formDetails.profile.querySelector(".profile__profile-job").textContent =
-    formDetails.input.querySelector(".job-field").value;
+  profileJob.textContent = profileJobFieldInput.value;
 
-  closePopup(modal, "modal_opened");
+  closePopup(modal);
 }
 
 /**
@@ -20,7 +18,7 @@ function saveProfileChanges(e, modal, formDetails) {
  */
 function openPopup(popup) {
   popup.classList.add("modal_opened");
-  popup.classList.add("display-img-modal-visibility");
+  // popup.classList.add("display-img-modal-visibility");
 }
 
 /**
@@ -51,19 +49,23 @@ function getCardElement(data) {
   cardImage.alt = data.name;
 
   // Like Card
-  cardElement.addEventListener("click", (e) => {
-    if (e.target.closest(".card__like-button")) {
-      likeCard(cardElement);
-    }
-  });
+  cardElement
+    .querySelector(".card__like-button")
+    .addEventListener("click", (e) => {
+      if (e.target.closest(".card__like-button")) {
+        likeCard(cardElement);
+      }
+    });
 
   // Delete Card
-  cardElement.addEventListener("click", (e) => {
-    if (e.target.closest(".card__trash-btn")) {
-      console.log("wow");
-      cardElement.remove();
-    }
-  });
+  cardElement
+    .querySelector(".card__trash-btn")
+    .addEventListener("click", (e) => {
+      if (e.target.closest(".card__trash-btn")) {
+        console.log("wow");
+        cardElement.remove();
+      }
+    });
 
   // Open card modal
   cardElement.addEventListener("click", (e) => {
@@ -85,30 +87,20 @@ function getCardElement(data) {
 }
 
 function openCardImageModal(card) {
-  // Get the modal img url and img title fields
-  const image = imgModal.querySelector(".image-modal__image");
-  const imageTitle = imgModal.querySelector(".image-modal__image-title");
-
   // Set their values to the value of the card that was clicked
   image.src = card.querySelector(".card__image").src;
   image.alt = card.querySelector(".card__name").textContent;
   imageTitle.textContent = card.querySelector(".card__name").textContent;
 
   // Make the modal visible
-  imgModal.classList.add("modal_opened");
-  imgModal.classList.add("display-img-modal-visibility");
+
+  openPopup(imgModal);
 }
 
 function likeCard(card) {
-  // Get the src of the card
-  let cardSrc = card.querySelector(".card__like-button-svg").src;
-
-  // Check if the card is currently liked or not
-  if (cardSrc.includes("svg/heart.svg")) {
-    card.querySelector(".card__like-button-svg").src = "svg/black-heart.svg";
-  } else {
-    card.querySelector(".card__like-button-svg").src = "svg/heart.svg";
-  }
+  card
+    .querySelector(".card__like-button-svg")
+    .classList.toggle("card__like-button-svg-liked");
 }
 
 // Initialize variables
@@ -141,17 +133,25 @@ let initialCards = [
 
 const page = document.querySelector(".page");
 const profile = page.querySelector(".profile");
+const profileName = profile.querySelector(".profile__profile-name");
+const profileJob = profile.querySelector(".profile__profile-job");
 const editProfileModal = page.querySelector(".editProfile");
 const editProfileButton = profile.querySelector(".profile__edit-profile");
-
+const profileNameFieldInput = editProfileModal.querySelector(".name-field");
+const profileJobFieldInput = editProfileModal.querySelector(".job-field");
 const closeEditModalBtn = page.querySelector(".editProfile .modal__close");
 const addCardModal = page.querySelector(".addNewCardModal");
-
+const addCardModalTitleField = addCardModal.querySelector(".title-field");
+const addCardModalLinkField = addCardModal.querySelector(".link-field");
 const cardTemplate = page.querySelector("#card").content;
 const gallery = page.querySelector(".gallery");
 const editProfileForm = page.querySelector(".editProfile .form");
+const editProfileFormNameField = editProfileForm.querySelector(".name-field");
+const editProfileFormJobField = editProfileForm.querySelector(".job-field");
 const addCardBtn = page.querySelector(".profile__add-button");
 const imgModal = page.querySelector(".image-modal");
+const image = imgModal.querySelector(".image-modal__image");
+const imageTitle = imgModal.querySelector(".image-modal__image-title");
 
 /*
     Propagate the page with cards with information drawn from
@@ -167,26 +167,18 @@ editProfileButton.addEventListener("click", () => {
   openPopup(editProfileModal);
 
   console.log(editProfileForm.querySelector(".name-field"));
-  editProfileForm.querySelector(".name-field").value = profile.querySelector(
-    ".profile__profile-name"
-  ).textContent;
-  editProfileForm.querySelector(".job-field").value = profile.querySelector(
-    ".profile__profile-job"
-  ).textContent;
+  editProfileFormNameField.value = profileName.textContent;
+  editProfileFormJobField.value = profileJob.textContent;
 });
 
 // Call the closeModal function
 closeEditModalBtn.addEventListener("click", () => {
-  closePopup(editProfileModal, "modal_opened");
+  closePopup(editProfileModal);
 });
 
 // Call the saveChanges function
 editProfileForm.addEventListener("submit", (e) => {
-  let formModal = {
-    profile: profile,
-    input: editProfileModal,
-  };
-  saveProfileChanges(e, editProfileModal, formModal);
+  saveProfileChanges(e, editProfileModal);
 });
 
 addCardBtn.addEventListener("click", () => {
@@ -201,18 +193,20 @@ addCardModal.querySelector(".modal__close").addEventListener("click", () => {
 // Create a new card
 addCardModal.querySelector(".form").addEventListener("submit", (e) => {
   e.preventDefault();
-  card = {
-    name: addCardModal.querySelector(".title-field").value,
-    link: addCardModal.querySelector(".link-field").value,
+  const card = {
+    name: addCardModalTitleField.value,
+    link: addCardModalLinkField.value,
   };
+
+  console.log(card.link);
 
   gallery.prepend(getCardElement(card));
   closePopup(addCardModal, "modal_opened");
 
-  addCardModal.querySelector(".title-field").value = "";
-  addCardModal.querySelector(".link-field").value = "";
+  addCardModalTitleField.value = "";
+  addCardModalLinkField.value = "";
 });
 
 imgModal.querySelector(".modal__close").addEventListener("click", () => {
-  closePopup(imgModal, "display-img-modal");
+  closePopup(imgModal);
 });
