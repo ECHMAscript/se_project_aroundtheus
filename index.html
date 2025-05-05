@@ -11,7 +11,7 @@
     <div class="page">
       <div class="modal editProfile">
         <div class="modal__container">
-          <form action="#" class="form">
+          <form action="#" class="form" novalidate>
             <h2 class="form__title">Edit profile</h2>
             <button type="button" class="modal__close">
               <img
@@ -24,13 +24,15 @@
               <input
                 type="text"
                 class="form__input-fields name-field"
-                placeholder="Name"
+                placeholder="Name" minlength="2" maxlength="40"
               />
+              <span class="form__input-error name-input-error">Please fill out this field.</span>
               <input
                 type="text"
                 class="form__input-fields job-field"
-                placeholder="Description"
+                placeholder="Description" minlength="2" maxlength="200"
               />
+              <span class="form__input-error descrip-input-error">Please enter a web address.</span>
             </fieldset>
             <button type="submit" class="form__button">Save</button>
           </form>
@@ -38,7 +40,7 @@
       </div>
       <div class="modal addNewCardModal">
         <div class="modal__container">
-          <form action="#" class="form">
+          <form action="#" class="form" novalidate>
             <h2 class="form__title">New Place</h2>
             <button type="button" class="modal__close">
               <img
@@ -53,11 +55,13 @@
                 class="form__input-fields title-field"
                 placeholder="Title"
               />
+              <span class="form__input-error descrip-input-error">Please enter a web address.</span>
               <input
                 type="text"
                 class="form__input-fields link-field"
                 placeholder="Image link"
               />
+              <span class="form__input-error descrip-input-error">Please enter a web address.</span>
             </fieldset>
             <button type="submit" class="form__button">Create</button>
           </form>

@@ -1,3 +1,29 @@
+const enableValidation = () => {
+  const formList = Array.from(page.querySelectorAll(".form"));
+
+  formList.forEach((formElement) => {
+    formElement.addEventListener("submit", (e) => {
+      e.preventDefault();
+    });
+
+    console.log(setEventListeners(formElement));
+  });
+}
+
+const hasInvalidInput = (inputList) => {
+  return inputList.some(input => {
+    return !input.validity.valid
+  });
+};
+
+const setEventListeners = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll(".form__input-fields"));
+
+  inputList.forEach((inputElement) => {
+    console.log(inputElement);
+  });
+};
+
 /**
  * Saves the changes from the form and updates
  * the user's profile information
@@ -145,6 +171,10 @@ const imgModal = page.querySelector(".image-modal");
 const image = imgModal.querySelector(".image-modal__image");
 const imageTitle = imgModal.querySelector(".image-modal__image-title");
 
+
+
+
+
 /*
     Propagate the page with cards with information drawn from
     the initialCards array
@@ -202,3 +232,5 @@ addCardModal.querySelector(".form").addEventListener("submit", (e) => {
 imgModal.querySelector(".modal__close").addEventListener("click", () => {
   closePopup(imgModal);
 });
+
+enableValidation();
