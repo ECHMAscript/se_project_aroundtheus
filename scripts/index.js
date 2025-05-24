@@ -6,12 +6,18 @@ const enableValidation = () => {
       e.preventDefault();
     });
 
-    console.log(setEventListeners(formElement));
+  
+    const fieldsetList = Array.from(formElement.querySelectorAll(".form__inputs"));
+
+    fieldsetList.forEach(fieldset => {
+      setEventListeners(fieldset);
+    });
   });
 }
 
 const hasInvalidInput = (inputList) => {
   return inputList.some(input => {
+    console.log(!input.validity.valid);
     return !input.validity.valid
   });
 };
@@ -21,7 +27,33 @@ const setEventListeners = (formElement) => {
 
   inputList.forEach((inputElement) => {
     console.log(inputElement);
+    
+    inputElement.addEventListener("input", () => {
+      console.log("You are typing... lets see if you have errors...: ", checkInputValidity(formElement, inputElement));
+    });
   });
+};
+
+const showInputError = (formElement, inputElement, errorMessage) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add("form__input-error-active")
+};
+
+const hideInputError = (formElement, inputElement) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+
+  errorElement.classList.remove("form__input-error_active");
+  errorElement.textContent = "";
+};
+
+const checkInputValidity = (formElement, inputElement) => {
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
+  } else {
+    hideInputError(formElement, inputElement);
+  }
 };
 
 /**
