@@ -71,12 +71,16 @@
   opacity: 0.8;
 }
 
+
 .button_inactive {
   border: 1px solid #000;
   opacity: .2;
   background-color: transparent;
   color: #000;
+  cursor: auto;
+  pointer-events: none;
 }
+
 
 
 /* ERROR MESSAGE STYLING */

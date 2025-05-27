@@ -18,7 +18,7 @@ const enableValidation = () => {
 const hasInvalidInput = (inputList) => {
   return inputList.some(input => {
     console.log(!input.validity.valid);
-    return !input.validity.valid
+    return !input.validity.valid;
   });
 };
 
@@ -26,7 +26,7 @@ const setEventListeners = (formElement) => {
   const inputList = Array.from(formElement.querySelectorAll(".form__input-fields"));
 
   inputList.forEach((inputElement) => {
-    console.log(inputElement);
+    console.log(inputElement, "heeey. you are typing...");
     
     inputElement.addEventListener("input", () => {
       console.log("You are typing... lets see if you have errors...: ", checkInputValidity(formElement, inputElement));
@@ -36,6 +36,7 @@ const setEventListeners = (formElement) => {
 
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  console.log(inputElement.id);
 
   errorElement.textContent = errorMessage;
   errorElement.classList.add("form__input-error-active")
@@ -48,11 +49,25 @@ const hideInputError = (formElement, inputElement) => {
   errorElement.textContent = "";
 };
 
+const toggleButtonState = (formElement, inputElement) => {
+
+  const formButton = formElement.querySelector(".form__button");
+  console.log("this is the toggle button function.... ", formElement.nextSibling);
+  if (!inputElement.validity.valid) {
+    formButton.classList.toggle("button_inactive");
+
+
+    /**THIS DOESN'T WORK. THIS IS WHERE YOU LEFT OFF */
+  }
+};
+
 const checkInputValidity = (formElement, inputElement) => {
   if (!inputElement.validity.valid) {
     showInputError(formElement, inputElement, inputElement.validationMessage);
+    toggleButtonState(formElement, inputElement);
   } else {
     hideInputError(formElement, inputElement);
+    toggleButtonState(formElement, inputElement);
   }
 };
 
