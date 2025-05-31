@@ -36,14 +36,17 @@ const setEventListeners = (formElement) => {
 
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  console.log(inputElement.id);
+
 
   errorElement.textContent = errorMessage;
-  errorElement.classList.add("form__input-error-active")
+  errorElement.classList.add("form__input-error-active");
+
 };
+
 
 const hideInputError = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  console.log(errorElement, " hey");
 
   errorElement.classList.remove("form__input-error_active");
   errorElement.textContent = "";
@@ -51,18 +54,23 @@ const hideInputError = (formElement, inputElement) => {
 
 const toggleButtonState = (formElement, inputElement) => {
 
-  const formButton = formElement.querySelector(".form__button");
-  console.log("this is the toggle button function.... ", formElement.nextSibling);
+  const formButton = formElement.closest(".form").querySelector(".form__button");
   if (!inputElement.validity.valid) {
-    formButton.classList.toggle("button_inactive");
-
-
-    /**THIS DOESN'T WORK. THIS IS WHERE YOU LEFT OFF */
+    formButton.classList.add("button_inactive");
+  } else {
+    formButton.classList.remove("button_inactive");
   }
 };
 
 const checkInputValidity = (formElement, inputElement) => {
+  
+  console.log("\nwoooah\n");
+  console.log(inputElement);
+
+  // FIX THIS, YOU DIDN'T!
+
   if (!inputElement.validity.valid) {
+
     showInputError(formElement, inputElement, inputElement.validationMessage);
     toggleButtonState(formElement, inputElement);
   } else {
