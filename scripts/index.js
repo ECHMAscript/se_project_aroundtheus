@@ -56,7 +56,7 @@ const hideInputError = (formElement, inputElement) => {
   console.log("I removed the thingamagig to the class...");
 };
 
-const toggleButtonState = (formElement, inputElement) => {
+const toggleButtonState = (formElement) => {
 
   const inputList = Array.from(formElement.querySelectorAll(".form__input-fields"));
   const formButton = formElement.closest(".form").querySelector(".form__button");
@@ -81,19 +81,17 @@ const toggleButtonState = (formElement, inputElement) => {
 const checkInputValidity = (formElement, inputElement) => {
   
 
-  console.log("\nwoooah\n");
-  console.log(inputElement);
 
   // FIX THIS, YOU DIDN'T!
 
   if (!inputElement.validity.valid) {
 
     showInputError(formElement, inputElement, inputElement.validationMessage);
-    toggleButtonState(formElement, inputElement);
+    toggleButtonState(formElement);
     return false;
   } else {
     hideInputError(formElement, inputElement);
-    toggleButtonState(formElement, inputElement);
+    toggleButtonState(formElement);
     return true;
   }
 };
@@ -119,6 +117,7 @@ function saveProfileChanges(e, modal) {
 function openPopup(popup) {
   popup.classList.add("modal_opened");
   // popup.classList.add("display-img-modal-visibility");
+  console.log();
 }
 
 /**
@@ -278,6 +277,13 @@ editProfileForm.addEventListener("submit", (e) => {
 });
 
 addCardBtn.addEventListener("click", () => {
+
+  const form = addCardModal.querySelector(".form")
+  let inputFields = Array.from(addCardModal.querySelectorAll(".form__input-fields"));
+  
+  inputFields.forEach(field => field.value = "");
+
+  toggleButtonState(form);
   openPopup(addCardModal);
 });
 
@@ -308,3 +314,10 @@ imgModal.querySelector(".modal__close").addEventListener("click", () => {
 });
 
 enableValidation();
+
+
+/***
+ * CODE A FUNCTION THAT CLOSES ALL MODALS WHEN THE OVERLAY BUTTON IS CLICKED
+ * CODE A FUNCTION THAT CLOSES ALL MODALS WHEN ESC IS CLICKED
+ * 
+ */
