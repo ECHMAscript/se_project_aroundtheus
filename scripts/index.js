@@ -16,7 +16,7 @@ const enableValidation = () => {
 }
 
 const hasInvalidInput = (inputList) => {
-  return inputList.some(input => {
+  return inputList.every(input => {
     return !input.validity.valid;
   });
 };
