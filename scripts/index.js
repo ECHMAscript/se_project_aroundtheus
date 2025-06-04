@@ -16,7 +16,7 @@ const enableValidation = () => {
 }
 
 const hasInvalidInput = (inputList) => {
-  return inputList.every(input => {
+  return inputList.some(input => {
     return !input.validity.valid;
   });
 };
@@ -24,7 +24,6 @@ const hasInvalidInput = (inputList) => {
 const setEventListeners = (formElement) => {
   const inputList = Array.from(formElement.querySelectorAll(".form__input-fields"));
   inputList.forEach((inputElement) => {
-    console.log(inputElement, "heeey. you are typing...");
     
     inputElement.addEventListener("input", () => {
       checkInputValidity(formElement, inputElement);
@@ -43,17 +42,14 @@ const showInputError = (formElement, inputElement, errorMessage) => {
 
   errorElement.textContent = errorMessage;
   errorElement.classList.add("form__input-error-active");
-  console.log("I added the thingamagig to the class...");
 };
 
 
 const hideInputError = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  console.log(errorElement, " hey");
 
   errorElement.classList.remove("form__input-error_active");
   errorElement.textContent = "";
-  console.log("I removed the thingamagig to the class...");
 };
 
 const toggleButtonState = (formElement) => {
@@ -116,8 +112,7 @@ function saveProfileChanges(e, modal) {
  */
 function openPopup(popup) {
   popup.classList.add("modal_opened");
-  // popup.classList.add("display-img-modal-visibility");
-  console.log();
+
 }
 
 /**
@@ -155,7 +150,6 @@ function getCardElement(data) {
     .querySelector(".card__trash-btn")
     .addEventListener("click", (e) => {
       if (e.target.closest(".card__trash-btn")) {
-        console.log("wow");
         cardElement.remove();
       }
     });
@@ -173,7 +167,6 @@ function getCardElement(data) {
       }
     }
 
-    console.log("Did I even get this far?");
   });
 
   return cardElement;
@@ -261,7 +254,6 @@ initialCards.forEach((card) => {
 editProfileButton.addEventListener("click", () => {
   openPopup(editProfileModal);
 
-  console.log(editProfileForm.querySelector(".name-field"));
   editProfileFormNameField.value = profileName.textContent;
   editProfileFormJobField.value = profileJob.textContent;
 });
@@ -300,7 +292,6 @@ addCardModal.querySelector(".form").addEventListener("submit", (e) => {
     link: addCardModalLinkField.value,
   };
 
-  console.log(card.link);
 
   gallery.prepend(getCardElement(card));
   closePopup(addCardModal);
@@ -316,8 +307,22 @@ imgModal.querySelector(".modal__close").addEventListener("click", () => {
 enableValidation();
 
 
-/***
- * CODE A FUNCTION THAT CLOSES ALL MODALS WHEN THE OVERLAY BUTTON IS CLICKED
- * CODE A FUNCTION THAT CLOSES ALL MODALS WHEN ESC IS CLICKED
- * 
- */
+page.querySelectorAll(".modal").forEach(modal => {
+  modal.addEventListener("click", e => {
+    const container = modal.querySelector('.modal__container') || modal.querySelector('.image-modal__inner-container');
+
+    if (!container.contains(e.target)) {
+      modal.classList.remove('modal_opened'); 
+    }
+  });
+
+
+});
+
+
+document.addEventListener("keydown", (e) => {
+  page.querySelectorAll(".modal").forEach(modal => {
+    if (e.key === "Escape") modal.classList.remove('modal_opened');
+  });
+
+})
